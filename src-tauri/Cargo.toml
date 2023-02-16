@@ -1,11 +1,11 @@
 [package]
-name = "app"
-version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
+name = "sipf"
+version = "0.1.1"
+description = "Sistema Integrado Planexcon"
+authors = ["Andre Grillo"]
+license = "MIT"
 repository = ""
-default-run = "app"
+default-run = "sipf"
 edition = "2021"
 rust-version = "1.59"
 

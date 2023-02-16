@@ -1,11 +1,11 @@
 {
-  "version": "v0.1.0",
+  "version": "v0.1.1",
   "notes": "Adicionando o autoUpdater",
-  "pub_date": "2023-02-16T06:12:57Z",
+  "pub_date": "2023-02-16T08:12:57Z",
   "platforms": {
     "windows-x86_64": {
       "signature": "",
-      "url": "https://github.com/andrellgrillo/sip-tauri/releases/download/v0.1.0/sipf_0.1.0_x64_en-US.msi"
+      "url": "https://github.com/andrellgrillo/sip-tauri/releases/download/v0.1.1/sipf_0.1.1_x64_en-US.msi"
     }
   }
 }

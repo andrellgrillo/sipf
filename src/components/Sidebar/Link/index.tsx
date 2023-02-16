@@ -17,8 +17,9 @@ export function NavL({ children, href, setIsOpen, setTitle, icon }: INavLink) {
 
   return (
     <NavLink to={href} onClick={handleClick}>
-      <div>
+      <div className="flex items-center gap-2 font-bold text-sm hover:text-cyan-600">
         <>{icon}</>
+        {children}
       </div>
     </NavLink>
   )
