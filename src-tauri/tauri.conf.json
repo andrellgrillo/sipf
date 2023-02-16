@@ -16,8 +16,8 @@
     },
     "bundle": {
       "active": true,
-      "category": "DeveloperTool",
-      "copyright": "",
+      "category": "Finance",
+      "copyright": "Planexcon - 2022",
       "deb": {
         "depends": []
       },
@@ -29,7 +29,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "br.com.planexcon",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
