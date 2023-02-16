@@ -51,7 +51,12 @@
       "csp": null
     },
     "updater": {
-      "active": false
+      "active": true,
+      "endpoints": [
+        "https://raw.githubusercontent.com/andrellgrillo/sipf/main/latest-version.json"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDNCNjIxQ0M5Njc3QUU1QTcKUldTbjVYcG55UnhpTzNpSFhKQVdPaC9WbjdSeEVROHRHb2pvWEJCVE1tdFY0SmJRNVhOWXU4S2cK"
     },
     "windows": [
       {
