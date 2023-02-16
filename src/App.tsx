@@ -11,13 +11,12 @@ async function Update() {
   try {
     const { shouldUpdate, manifest } = await checkUpdate()
     if (shouldUpdate) {
-      console.warn(shouldUpdate)
-
       // display dialog
-      await installUpdate()
-
+      const install = await installUpdate()
+      console.info(install)
       // instal complete, restart the app
       await relaunch()
+      console.info(await checkUpdate())
     }
   } catch (error) {
     console.error(error)

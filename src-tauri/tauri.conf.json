@@ -8,11 +8,14 @@
   },
   "package": {
     "productName": "sipf",
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "tauri": {
     "allowlist": {
-      "all": false
+      "all": false,
+      "process": {
+        "all": true
+      }
     },
     "bundle": {
       "active": true,
