@@ -26,7 +26,7 @@ export function Sidebar({ setIsOpen, setTitle }: ISidebar) {
       <Section title="Contratos" icon={<FaFileContract size={24} />}>
         <div className=" flex items-center gap-4 p-4">
           <NavL
-            href="/"
+            href="/client/contracts"
             setIsOpen={() => setIsOpen(false)}
             setTitle={setTitle}
             icon={<MdDashboard size={20} />}

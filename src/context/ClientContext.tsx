@@ -18,6 +18,20 @@ interface IClient {
   prefix: string
 }
 
+interface IClientContracts {
+  id: string
+  clientId: string
+  modality: string
+  nmodality: string
+  process: string
+  contract: string
+  index: string
+  object: string
+  description: string
+  emails: string
+  status: boolean
+}
+
 interface ICreateClientInput {
   name: string
   cnpj: string
@@ -30,6 +44,8 @@ interface ICreateClientInput {
 interface IClientContext {
   clients: IClient[]
   readClients: () => Promise<void>
+  clientContracts: IClientContracts[]
+  readClientContracts: (clientId: string) => Promise<void>
   createClient: (data: ICreateClientInput) => Promise<void>
   pacthClientStatus: (clientId: string) => Promise<void>
   updateClient: (data: IClient) => Promise<void>
@@ -43,6 +59,7 @@ interface IClientsProvider {
 
 export function ClientsProvider({ children }: IClientsProvider) {
   const [clients, setClients] = useState<IClient[]>([])
+  const [clientContracts, setClientContracts] = useState<IClientContracts[]>([])
 
   const readClients = useCallback(async () => {
     const response = await api.get('/clients')
@@ -111,6 +128,11 @@ export function ClientsProvider({ children }: IClientsProvider) {
     [clients],
   )
 
+  const readClientContracts = useCallback(async (clientId: string) => {
+    const response = await api.get(`/clients/${clientId}/contracts`)
+    setClientContracts(response.data)
+  }, [])
+
   useEffect(() => {
     readClients()
   }, [readClients])
@@ -123,6 +145,8 @@ export function ClientsProvider({ children }: IClientsProvider) {
         createClient,
         pacthClientStatus,
         updateClient,
+        clientContracts,
+        readClientContracts,
       }}
     >
       {children}
