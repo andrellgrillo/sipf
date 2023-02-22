@@ -20,16 +20,24 @@ interface IClient {
 
 interface IClientContracts {
   id: string
-  clientId: string
-  modality: string
-  nmodality: string
-  process: string
-  contract: string
-  index: string
-  object: string
-  description: string
-  emails: string
+  name: string
+  cnpj: string
+  treatment: string
+  shortName: string
+  resp: string
   status: boolean
+  prefix: string
+  Contracts: {
+    id: string
+    clientId: string
+    modality: string
+    nModality: string
+    process: string
+    contract: string
+    index: string
+    object: string
+    description: string
+  }
 }
 
 interface ICreateClientInput {
@@ -129,6 +137,7 @@ export function ClientsProvider({ children }: IClientsProvider) {
   )
 
   const readClientContracts = useCallback(async (clientId: string) => {
+    console.error(clientId)
     const response = await api.get(`/clients/${clientId}/contracts`)
     setClientContracts(response.data)
   }, [])

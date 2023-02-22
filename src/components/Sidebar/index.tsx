@@ -35,7 +35,18 @@ export function Sidebar({ setIsOpen, setTitle }: ISidebar) {
           </NavL>
         </div>
       </Section>
-      <Section title="Atividades">teste</Section>
+      <Section title="Atividades">
+        <div className=" flex items-center gap-4 p-4">
+          <NavL
+            href="/teste"
+            setIsOpen={() => setIsOpen(false)}
+            setTitle={setTitle}
+            icon={<MdDashboard size={20} />}
+          >
+            Teste
+          </NavL>
+        </div>
+      </Section>
       <Section title="Clientes">teste</Section>
       <Section title="Fornecedor">teste</Section>
     </div>

@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { Router } from './Router'
 
 import './index.css'
+import 'tw-elements'
 
 async function Update() {
   console.info('Entrou')
@@ -20,7 +21,6 @@ async function Update() {
     }
   } catch (error) {
     console.error(error)
-    console.info(await checkUpdate)
   }
 }
 

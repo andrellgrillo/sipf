@@ -8,6 +8,8 @@ import { cnpjMask } from '../../lib/cnpjMask'
 import { ClientContext } from '../../context/ClientContext'
 import { Switchs } from '../../components/Switch'
 import { UpdateClientForm } from '../../components/UpdateClientForm'
+import { Tb3DCubeSphere } from 'react-icons/tb'
+import { NavLink } from 'react-router-dom'
 
 export function Client() {
   const { clients, pacthClientStatus } = useContext(ClientContext)
@@ -144,6 +146,12 @@ export function Client() {
                           </Dialog.Content>
                         </Dialog.Portal>
                       </Dialog.Root>
+                      <NavLink
+                        to={`/client/contracts/clienteId`}
+                        itemID="7b4b1a43-297b-43c2-8b4f-bf4975841598"
+                      >
+                        <Tb3DCubeSphere />
+                      </NavLink>
                     </div>
                   </td>
                 </tr>
