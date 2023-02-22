@@ -20,6 +20,7 @@ async function Update() {
     }
   } catch (error) {
     console.error(error)
+    console.info(await checkUpdate)
   }
 }
 
