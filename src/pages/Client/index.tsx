@@ -1,15 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
+import { NavLink } from 'react-router-dom'
 import { FaPlusCircle, FaSearch } from 'react-icons/fa'
 import { FiEdit, FiX } from 'react-icons/fi'
+import { MdPlaylistAdd } from 'react-icons/md'
 
-import { NewClientForm } from '../../components/NewClientForm'
-import { cnpjMask } from '../../lib/cnpjMask'
 import { ClientContext } from '../../context/ClientContext'
+
+import { cnpjMask } from '../../lib/cnpjMask'
+
 import { Switchs } from '../../components/Switch'
 import { UpdateClientForm } from '../../components/UpdateClientForm'
+import { NewClientForm } from '../../components/NewClientForm'
+import { NewContractForm } from '../../components/NewContractForm'
 import { Tb3DCubeSphere } from 'react-icons/tb'
-import { NavLink } from 'react-router-dom'
 
 export function Client() {
   const { clients, pacthClientStatus } = useContext(ClientContext)
@@ -32,6 +36,10 @@ export function Client() {
   }, [setFilterName])
 
   // console.log(clients)
+
+  // clients.map((c) => {
+  //   return c.id
+  // })
 
   return (
     <>
@@ -117,11 +125,11 @@ export function Client() {
                     {/* {filteredD.status ? 'Ativo' : 'Inativo'} */}
                   </td>
                   <td className=" border-t-4 border-solid border-slate-800 p-2 text-sm pr-6">
-                    <div className="flex justify-center items-center">
+                    <div className="flex items-center justify-around">
                       <Dialog.Root key={filteredD.id}>
                         <Dialog.Trigger
                           type="button"
-                          className="text-sm font-extrabold text-white rounded flex justify-center items-center gap-2 hover:text-cyan-600"
+                          className="text-sm font-extrabold rounded flex justify-center items-center gap-2 hover:text-cyan-500"
                         >
                           <FiEdit size={20} />
                         </Dialog.Trigger>
@@ -132,7 +140,7 @@ export function Client() {
                               <FiX size={24} aria-label="Fechar" />
                             </Dialog.Close>
                             <Dialog.Title className="text-3xl leading-tight font-extrabold text-slate-100">
-                              Atualizar Cliente
+                              Editar Cliente
                             </Dialog.Title>
                             <UpdateClientForm
                               id={filteredD.id}
@@ -146,11 +154,33 @@ export function Client() {
                           </Dialog.Content>
                         </Dialog.Portal>
                       </Dialog.Root>
+                      <Dialog.Root>
+                        <Dialog.Trigger
+                          type="button"
+                          className="text-sm font-extrabold rounded flex justify-center items-center gap-2 hover:text-cyan-500"
+                        >
+                          <MdPlaylistAdd size={26} />
+                        </Dialog.Trigger>
+                        <Dialog.Portal>
+                          <Dialog.Overlay className="w-screen bg-slate-900/80 fixed inset-0" />
+                          <Dialog.Content className="absolute p-10 bg-slate-800 rounded-2xl w-full max-w-4xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                            <Dialog.Close className="absolute right-6 top-6 text-slate-400 hover:text-slate-200">
+                              <FiX size={24} aria-label="Fechar" />
+                            </Dialog.Close>
+                            <Dialog.Title className="text-3xl leading-tight font-extrabold text-slate-100 flex items-center gap-3">
+                              <FaPlusCircle />
+                              Criar Novo Contrato
+                            </Dialog.Title>
+                            <NewContractForm clientId={filteredD.id} />
+                          </Dialog.Content>
+                        </Dialog.Portal>
+                      </Dialog.Root>
+
                       <NavLink
-                        to={`/client/contracts/clienteId`}
-                        itemID="7b4b1a43-297b-43c2-8b4f-bf4975841598"
+                        to={`/contracts/${filteredD.shortName}/${filteredD.id}`}
+                        className="hover:text-cyan-500"
                       >
-                        <Tb3DCubeSphere />
+                        <Tb3DCubeSphere size={20} />
                       </NavLink>
                     </div>
                   </td>

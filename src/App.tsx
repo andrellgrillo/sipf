@@ -8,7 +8,7 @@ import './index.css'
 import 'tw-elements'
 
 async function Update() {
-  console.info('Entrou')
+  // console.info('Entrou')
   try {
     const { shouldUpdate, manifest } = await checkUpdate()
     if (shouldUpdate) {

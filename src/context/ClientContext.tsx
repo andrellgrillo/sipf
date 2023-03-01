@@ -18,27 +18,29 @@ interface IClient {
   prefix: string
 }
 
-interface IClientContracts {
-  id: string
-  name: string
-  cnpj: string
-  treatment: string
-  shortName: string
-  resp: string
-  status: boolean
-  prefix: string
-  Contracts: {
-    id: string
-    clientId: string
-    modality: string
-    nModality: string
-    process: string
-    contract: string
-    index: string
-    object: string
-    description: string
-  }
-}
+// interface IContracts {
+//   id: string
+//   clientId: string
+//   modality: string
+//   nModality: string
+//   process: string
+//   contract: string
+//   index: string
+//   object: string
+//   description: string
+// }
+
+// interface IClientContracts {
+//   id: string
+//   name: string
+//   cnpj: string
+//   treatment: string
+//   shortName: string
+//   resp: string
+//   status: boolean
+//   prefix: string
+//   Contracts: IContracts[]
+// }
 
 interface ICreateClientInput {
   name: string
@@ -52,8 +54,8 @@ interface ICreateClientInput {
 interface IClientContext {
   clients: IClient[]
   readClients: () => Promise<void>
-  clientContracts: IClientContracts[]
-  readClientContracts: (clientId: string) => Promise<void>
+  // clientContracts: IClientContracts
+  // readClientContracts: (clientId: string) => void
   createClient: (data: ICreateClientInput) => Promise<void>
   pacthClientStatus: (clientId: string) => Promise<void>
   updateClient: (data: IClient) => Promise<void>
@@ -67,7 +69,17 @@ interface IClientsProvider {
 
 export function ClientsProvider({ children }: IClientsProvider) {
   const [clients, setClients] = useState<IClient[]>([])
-  const [clientContracts, setClientContracts] = useState<IClientContracts[]>([])
+  // const [clientContracts, setClientContracts] = useState<IClientContracts>({
+  //   id: '',
+  //   name: '',
+  //   cnpj: '',
+  //   treatment: '',
+  //   shortName: '',
+  //   resp: '',
+  //   status: true,
+  //   prefix: '',
+  //   Contracts: [],
+  // })
 
   const readClients = useCallback(async () => {
     const response = await api.get('/clients')
@@ -136,11 +148,11 @@ export function ClientsProvider({ children }: IClientsProvider) {
     [clients],
   )
 
-  const readClientContracts = useCallback(async (clientId: string) => {
-    console.error(clientId)
-    const response = await api.get(`/clients/${clientId}/contracts`)
-    setClientContracts(response.data)
-  }, [])
+  // const readClientContracts = useCallback(async (clientId: string) => {
+  //   // console.info(clientId)
+  //   const response = await api.get(`/clients/${clientId}/contracts`)
+  //   setClientContracts(response.data)
+  // }, [])
 
   useEffect(() => {
     readClients()
@@ -154,8 +166,8 @@ export function ClientsProvider({ children }: IClientsProvider) {
         createClient,
         pacthClientStatus,
         updateClient,
-        clientContracts,
-        readClientContracts,
+        // clientContracts,
+        // readClientContracts,
       }}
     >
       {children}
