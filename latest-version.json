@@ -4,7 +4,7 @@
   "pub_date": "2023-03-01T07:24:57Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTbjVYcG55UnhpTzhUV1F1Vzd3Qmg5ZjJjWHJlblpsZTQrMGhNZnJwOXhWaWR5OU1pTDJyb01Ob0RFTXZzVUc2ZTA2aVdudnV3SlRBWEJYdlg0RERuNjNrRzZ4allIMmcwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc3MDY1NjIwCWZpbGU6c2lwZl8wLjEuM194NjRfZW4tVVMubXNpLnppcAo3L2FwcUN6WVZubGdRcEo4bEptdHVBSksyRjRJK3N0cWJ4MlJxeEdRbFRTdTJBMzRTckpQeVIyV2NYc1FpcmFjUGZqbmkrOWdWWlRRYndoQWx2Mm1CQT09Cg==",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTbjVYcG55UnhpT3dZQVZCcitldWs2MW8yQzJZRXJnSnkyM1dMYUZuRytiWEhFaXhLMmJiWlVxSlZ2aW5YK3pIUVVxcFA3dmhpMDVCbk5Va0Njb0Q1aHo2bnBhVTZZVEE0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc3Njc3NzkwCWZpbGU6c2lwZl8wLjEuNV94NjRfZW4tVVMubXNpLnppcApRd00vdldpVGNSa2tLTnpDZm04ZjMwbEk1ZUVTWXhoaTNFL01qWTZKT1ZrdFV2MDdWWi95M05HQWpaV2g1OVlwRHNrSDlDbnE5RGJJYTBIRk5kN0RDZz09Cg==",
       "url": "https://github.com/andrellgrillo/sipf/releases/download/v0.1.5/sipf_0.1.5_x64_en-US.msi"
     }
   }
