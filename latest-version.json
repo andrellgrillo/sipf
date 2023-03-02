@@ -1,11 +1,11 @@
 {
-  "version": "v0.1.7",
+  "version": "v0.1.8",
   "notes": "Adicionando o autoUpdater",
   "pub_date": "2023-03-02T13:35:57Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "https://github.com/andrellgrillo/sipf/releases/download/v0.1.7/sipf_0.1.7_x64_en-US.msi.zip.sig",
-      "url": "https://github.com/andrellgrillo/sipf/releases/download/v0.1.7/sipf_0.1.7_x64_en-US.msi"
+      "signature": "https://github.com/andrellgrillo/sipf/releases/download/v0.1.8/sipf_0.1.8_x64_en-US.msi.zip.sig",
+      "url": "https://github.com/andrellgrillo/sipf/releases/download/v0.1.8/sipf_0.1.8_x64_en-US.msi"
     }
   }
 }

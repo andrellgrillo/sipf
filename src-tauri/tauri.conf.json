@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "sipf",
-    "version": "0.1.7"
+    "version": "0.1.8"
   },
   "tauri": {
     "allowlist": {
@@ -47,7 +47,7 @@
       "windows": {
         "certificateThumbprint": "D09BA367C02813B4BEC2229A871FD916FEFE0DCF",
         "digestAlgorithm": "sha256",
-        "timestampUrl": "http://timestamp.comodoca.com"
+        "timestampUrl": "http://timestamp.digicert.com"
       }
     },
     "security": {
@@ -58,7 +58,7 @@
       "endpoints": [
         "https://raw.githubusercontent.com/andrellgrillo/sipf/main/latest-version.json"
       ],
-      "dialog": true,
+      "dialog": false,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDNCNjIxQ0M5Njc3QUU1QTcKUldTbjVYcG55UnhpTzNpSFhKQVdPaC9WbjdSeEVROHRHb2pvWEJCVE1tdFY0SmJRNVhOWXU4S2cK"
     },
     "windows": [

@@ -1,7 +1,12 @@
 {
   "name": "sipf",
-  "private": true,
-  "version": "0.1.7",
+  "author": {
+    "name": "Andre Luiz Leite Grillo",
+    "email": "andrell.grillo@gmail.com",
+    "url": "https://www.planexcon.com.br"
+  },
+  "private": false,
+  "version": "0.1.8",
   "type": "module",
   "scripts": {
     "dev": "vite",
