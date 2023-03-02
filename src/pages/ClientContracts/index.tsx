@@ -6,6 +6,7 @@ import dayjs from 'dayjs'
 
 import { ContractContext } from '../../context/ContractContext'
 import { api } from '../../lib/axios'
+import { priceFormatter } from '../../utils/format'
 
 type IUseParams = {
   nome: string
@@ -188,11 +189,15 @@ export function ClientContracts() {
                             <td className=" pl-4 w-[130px] font-extrabold text-slate-400 text-right pr-3">
                               VALOR ANUAL:
                             </td>
-                            <td className="w-20">{cd.annualValue}</td>
+                            <td className="w-20">
+                              {priceFormatter.format(cd.annualValue)}
+                            </td>
                             <td className=" pl-4 w-[140px] font-extrabold text-slate-400 text-right pr-3">
                               VALOR MENSAL:
                             </td>
-                            <td className="w-20">{cd.monthlyValue}</td>
+                            <td className="w-20">
+                              {priceFormatter.format(cd.monthlyValue)}
+                            </td>
                             <td rowSpan={2} className="w-10 pl-5">
                               <TbListDetails size={16} />
                             </td>
