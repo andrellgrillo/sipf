@@ -38,7 +38,7 @@ export function NewContractForm({ clientId }: INewContractForm) {
   })
 
   async function handleCreateNewContract(data: NewContractFormInputs) {
-    // console.log(data)
+    console.log(data)
     const {
       clientId,
       modality,

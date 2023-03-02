@@ -65,17 +65,16 @@ export function ClientContracts() {
         className="flex overflow-auto mt-8 w-screen"
         // key={clientContracts.id}
       >
-        {contracts.map((contract, i) => {
-          return (
-            <div
-              key={contract.id}
-              className="w-full border-collapse min-w-[600px]"
-            >
-              <div className="sticky top-0 bg-slate-500 p-2 text-left text-slate-100 test-sm rounded-tl-[8px] pl-4 last:rounded-tr-[8px]">
-                {nome}
-              </div>
-
-              <div className="rounded-none border border-l-0 border-r-0 border-t-4 border-solid border-slate-800 text-xs  bg-slate-700 w-full">
+        <div className="w-full border-collapse min-w-[600px]">
+          <div className="sticky top-0 bg-slate-500 p-2 text-left text-slate-100 test-sm rounded-tl-[8px] pl-4 last:rounded-tr-[8px]">
+            {nome}
+          </div>
+          {contracts.map((contract, i) => {
+            return (
+              <div
+                key={contract.id}
+                className="rounded-none border border-l-0 border-r-0 border-t-4 border-solid border-slate-800 text-xs  bg-slate-700 w-full"
+              >
                 <h2 className="mb-0 w-full flex justify-between items-center">
                   <table className="w-full border-collapse  min-w-[600px]">
                     <tbody className="text-slate-300 bg-slate-700 text-left">
@@ -213,9 +212,9 @@ export function ClientContracts() {
                   </div>
                 </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
     </>
   )
