@@ -1,10 +1,10 @@
 {
   "version": "v0.1.7",
   "notes": "Adicionando o autoUpdater",
-  "pub_date": "2023-03-01T13:35:57Z",
+  "pub_date": "2023-03-02T13:35:57Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTbjVYcG55UnhpTzJXUnpjTHBxVS96VW1tZDF4NjJkTndycjd0OU1EaEpzN1FQSU8yVzNMTktNL3g5TzNKSDZqeXNLWU9XaFBVNndXSW9Zbys1bkhubDJYUHlDdzlqSkFZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc3Nzg0NjI4CWZpbGU6c2lwZl8wLjEuN194NjRfZW4tVVMubXNpLnppcAorV2JGV05BOGNqUjVRWkd0L1I4TmZCOG5iZnh3Z0ZJZDREUDRiRWUrWFpoWHBPbnk4N2pBRG11MVV1ZlphUGNwcjloTEVQZHZkUmIrZ09oN1JOWUpDdz09Cg==",
+      "signature": "https://github.com/andrellgrillo/sipf/releases/download/v0.1.7/sipf_0.1.7_x64_en-US.msi.zip.sig",
       "url": "https://github.com/andrellgrillo/sipf/releases/download/v0.1.7/sipf_0.1.7_x64_en-US.msi"
     }
   }
