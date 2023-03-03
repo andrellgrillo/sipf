@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "sipf",
-    "version": "0.2.0"
+    "version": "0.2.1"
   },
   "tauri": {
     "allowlist": {
@@ -58,7 +58,7 @@
       "endpoints": [
         "https://raw.githubusercontent.com/andrellgrillo/sipf/main/latest-version.json"
       ],
-      "dialog": false,
+      "dialog": true,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDNCNjIxQ0M5Njc3QUU1QTcKUldTbjVYcG55UnhpTzNpSFhKQVdPaC9WbjdSeEVROHRHb2pvWEJCVE1tdFY0SmJRNVhOWXU4S2cK"
     },
     "windows": [
