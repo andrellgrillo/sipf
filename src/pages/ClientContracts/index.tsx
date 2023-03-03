@@ -7,6 +7,8 @@ import dayjs from 'dayjs'
 import { ContractContext } from '../../context/ContractContext'
 import { api } from '../../lib/axios'
 import { priceFormatter } from '../../utils/format'
+import { FiEdit } from 'react-icons/fi'
+import { MdPlaylistAdd } from 'react-icons/md'
 
 type IUseParams = {
   nome: string
@@ -100,6 +102,18 @@ export function ClientContracts() {
                           ÍNDICE DE REAJUSTE:
                         </td>
                         <td className="w-[15%] text-left">{contract.index}</td>
+                        <td rowSpan={3}>
+                          <div className="flex justify-center items-center flex-col px-4 gap-3">
+                            <FiEdit
+                              size={20}
+                              className=" hover:text-cyan-500"
+                            />
+                            <MdPlaylistAdd
+                              size={26}
+                              className=" hover:text-cyan-500"
+                            />
+                          </div>
+                        </td>
                       </tr>
                       <tr className=" text-xs font-bold text-left">
                         <td className="py-2 pl-4 w-[90px] font-extrabold text-slate-400 text-right pr-3">
