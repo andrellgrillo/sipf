@@ -1,14 +1,18 @@
 import { useContext, useEffect, useState } from 'react'
-import { FaSearch } from 'react-icons/fa'
-import { TbListDetails } from 'react-icons/tb'
+import * as Dialog from '@radix-ui/react-dialog'
 import { useParams } from 'react-router-dom'
 import dayjs from 'dayjs'
+
+import { TbListDetails } from 'react-icons/tb'
+import { FiEdit, FiX } from 'react-icons/fi'
+import { MdPlaylistAdd } from 'react-icons/md'
 
 import { ContractContext } from '../../context/ContractContext'
 import { api } from '../../lib/axios'
 import { priceFormatter } from '../../utils/format'
-import { FiEdit } from 'react-icons/fi'
-import { MdPlaylistAdd } from 'react-icons/md'
+import { UpdateContractForm } from '../../components/UpdateContractForm'
+import { FaPlusCircle } from 'react-icons/fa'
+import { NewCDetailForm } from '../../components/NewCDetailForm'
 
 type IUseParams = {
   nome: string
@@ -44,11 +48,11 @@ export function ClientContracts() {
 
   return (
     <>
-      <div className="w-screen px-4 flex justify-end gap-4">
+      {/* <div className="w-screen px-4 flex justify-end gap-4">
         <div className="flex items-center gap-3">
           <label
             htmlFor="filtro"
-            className="font-semibold leading-tight text-slate-100 flex items-center gap-2"
+            className="font-semibold leading-tight text-white flex items-center gap-2"
           >
             <FaSearch size={16} />
             Cliente:
@@ -58,10 +62,10 @@ export function ClientContracts() {
             id="filtro"
             placeholder="Pesquisar cliente"
             // onChange={handleChangeFilterName}
-            className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 placeholder:text-slate-400 uppercase flex-1"
+            className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white placeholder:text-slate-400 uppercase flex-1"
           />
         </div>
-      </div>
+      </div> */}
 
       <div
         id="accordionFlushExample"
@@ -69,7 +73,7 @@ export function ClientContracts() {
         // key={clientContracts.id}
       >
         <div className="w-full border-collapse min-w-[600px]">
-          <div className="sticky top-0 bg-slate-500 p-2 text-left text-slate-100 test-sm rounded-tl-[8px] pl-4 last:rounded-tr-[8px]">
+          <div className="sticky top-0 bg-slate-500 p-2 text-left text-white test-sm rounded-tl-[8px] pl-4 last:rounded-tr-[8px]">
             {nome}
           </div>
           {contracts.map((contract, i) => {
@@ -81,48 +85,100 @@ export function ClientContracts() {
                 <h2 className="mb-0 w-full flex justify-between items-center">
                   <table className="w-full border-collapse  min-w-[600px]">
                     <tbody className="text-slate-300 bg-slate-700 text-left">
-                      <tr className=" font-bold">
-                        <td className="py-2 pl-4 w-[10%] font-extrabold text-slate-400 text-right pr-3">
+                      <tr>
+                        <td className="py-2 pl-4 w-[10%] font-semibold text-slate-400 text-right pr-3">
                           CONTRATO:
                         </td>
                         <td className="w-[5%]">{contract.contract}</td>
-                        <td className="pl-4 w-[10%] font-extrabold text-slate-400 text-right pr-3">
+                        <td className="pl-4 w-[10%] font-semibold text-slate-400 text-right pr-3">
                           PROCESSO:
                         </td>
                         <td className="w-[8%] pl-1">{contract.process}</td>
-                        <td className="pl-4 w-[10%] font-extrabold text-slate-400 text-right pr-3">
+                        <td className="pl-4 w-[10%] font-semibold text-slate-400 text-right pr-3">
                           MODALIDADE:
                         </td>
                         <td className="w-[15%]">{contract.modality}</td>
-                        <td className="pl-4 w-[10%] font-extrabold text-slate-400 text-right pr-3">
+                        <td className="pl-4 w-[10%] font-semibold text-slate-400 text-right pr-3">
                           Nº MODALIDADE:
                         </td>
                         <td className="w-[5%]">{contract.nModality}</td>
-                        <td className="pl-4 w-[12%] font-extrabold text-slate-400 text-right pr-3">
+                        <td className="pl-4 w-[12%] font-semibold text-slate-400 text-right pr-3">
                           ÍNDICE DE REAJUSTE:
                         </td>
                         <td className="w-[15%] text-left">{contract.index}</td>
-                        <td rowSpan={3}>
+                        <td rowSpan={4}>
                           <div className="flex justify-center items-center flex-col px-4 gap-3">
-                            <FiEdit
-                              size={20}
-                              className=" hover:text-cyan-500"
-                            />
-                            <MdPlaylistAdd
-                              size={26}
-                              className=" hover:text-cyan-500"
-                            />
+                            <Dialog.Root key={contract.id}>
+                              <Dialog.Trigger
+                                type="button"
+                                className="text-sm font-extrabold rounded flex justify-center items-center gap-2 hover:text-cyan-500"
+                              >
+                                <FiEdit size={20} />
+                              </Dialog.Trigger>
+                              <Dialog.Portal>
+                                <Dialog.Overlay className="w-screen bg-slate-900/80 fixed inset-0" />
+                                <Dialog.Content className="absolute p-10 bg-slate-800 rounded-2xl w-full max-w-4xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                                  <Dialog.Close className="absolute right-6 top-6 text-slate-400 hover:text-slate-200">
+                                    <FiX size={24} aria-label="Fechar" />
+                                  </Dialog.Close>
+                                  <Dialog.Title className="text-3xl leading-tight font-extrabold text-white flex items-center gap-3">
+                                    <FiEdit />
+                                    Editar Contrato
+                                  </Dialog.Title>
+                                  <UpdateContractForm
+                                    id={contract.id}
+                                    clientId={contract.clientId}
+                                    modality={contract.modality}
+                                    nModality={contract.nModality}
+                                    bidding={contract.bidding}
+                                    process={contract.process}
+                                    contract={contract.contract}
+                                    index={contract.index}
+                                    object={contract.object}
+                                    description={contract.description}
+                                    emails={contract.emails}
+                                  />
+                                </Dialog.Content>
+                              </Dialog.Portal>
+                            </Dialog.Root>
+                            <Dialog.Root>
+                              <Dialog.Trigger
+                                type="button"
+                                className="text-sm font-extrabold rounded flex justify-center items-center gap-2 hover:text-cyan-500"
+                              >
+                                <MdPlaylistAdd size={26} />
+                              </Dialog.Trigger>
+                              <Dialog.Portal>
+                                <Dialog.Overlay className="w-screen bg-slate-900/80 fixed inset-0" />
+                                <Dialog.Content className="absolute p-10 bg-slate-800 rounded-2xl w-full max-w-4xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                                  <Dialog.Close className="absolute right-6 top-6 text-slate-400 hover:text-slate-200">
+                                    <FiX size={24} aria-label="Fechar" />
+                                  </Dialog.Close>
+                                  <Dialog.Title className="text-3xl leading-tight font-extrabold text-white flex items-center gap-3">
+                                    <FaPlusCircle />
+                                    Novo Detalhes do Contrato
+                                  </Dialog.Title>
+                                  <NewCDetailForm contractId={contract.id} />
+                                </Dialog.Content>
+                              </Dialog.Portal>
+                            </Dialog.Root>
                           </div>
                         </td>
                       </tr>
-                      <tr className=" text-xs font-bold text-left">
-                        <td className="py-2 pl-4 w-[90px] font-extrabold text-slate-400 text-right pr-3">
+                      <tr className=" text-xs text-left">
+                        <td className="py-2 pl-4 w-[90px] font-semibold text-slate-400 text-right pr-3">
+                          LEI DE LICITAÇÕES:
+                        </td>
+                        <td>{contract.bidding}</td>
+                      </tr>
+                      <tr className=" text-xs text-left">
+                        <td className="py-2 pl-4 w-[90px] font-semibold text-slate-400 text-right pr-3">
                           OBJETO:
                         </td>
                         <td colSpan={9}>{contract.object}</td>
                       </tr>
-                      <tr className=" text-xs font-bold text-left">
-                        <td className="py-2 pl-4 w-[90px] font-extrabold text-slate-400 text-right pr-3">
+                      <tr className=" text-xs text-left">
+                        <td className="py-2 pl-4 w-[90px] font-semibold text-slate-400 text-right pr-3">
                           DESCRIÇÃO:
                         </td>
                         <td colSpan={9} className="pb-4">
@@ -134,7 +190,7 @@ export function ClientContracts() {
 
                   <div id={contract.id} className="mr-4">
                     <button
-                      className="group relative flex w-full items-center rounded-none border-0 bg-slate-700 text-slate-100 transition [overflow-anchor:none]
+                      className="group relative flex w-full items-center rounded-none border-0 bg-slate-700 text-white transition [overflow-anchor:none]
                         hover:z-[2] focus:z-[3] focus:outline-none [&:not([data-te-collapse-collapsed])]:bg-slate-700 [&:not([data-te-collapse-collapsed])]:text-cyan-600"
                       type="button"
                       data-te-collapse-init
@@ -175,38 +231,38 @@ export function ClientContracts() {
                   aria-labelledby={contract.id}
                   data-te-parent="#accordionFlushExample"
                 >
-                  <div className="py-4 px-5 bg-[#273446] text-slate-100 text-sm">
+                  <div className="py-4 px-5 bg-[#273446] text-white text-sm">
                     {contractDetails.map((cd) => (
                       <table
                         key={cd.id}
                         className="w-full border-collapse min-w-[600px] border-b-[1px] border-solid border-slate-600"
                       >
                         <tbody>
-                          <tr className="h-8 text-xs font-bold">
-                            <td className="pl-4 w-[90px] font-extrabold text-slate-400 text-right pr-3">
+                          <tr className="h-8 text-xs">
+                            <td className="pl-4 w-[90px] font-semibold text-slate-400 text-right pr-3">
                               TIPO:
                             </td>
                             <td className="w-32">{cd.type}</td>
-                            <td className=" pl-4 w-[90px] font-extrabold text-slate-400 text-right pr-3">
+                            <td className=" pl-4 w-[90px] font-semibold text-slate-400 text-right pr-3">
                               VALIDADE:
                             </td>
                             <td className="w-40">
                               {dayjs(cd.dateIn).format('DD/MM/YYYY')} -{' '}
                               {dayjs(cd.dateOut).format('DD/MM/YYYY')}
                             </td>
-                            <td className="pl-4 w-[190px] font-extrabold text-slate-400 text-right pr-3">
+                            <td className="pl-4 w-[190px] font-semibold text-slate-400 text-right pr-3">
                               DATA DO DOCUMENTO:
                             </td>
                             <td className="w-20">
                               {dayjs(cd.documentDate).format('DD/MM/YYYY')}
                             </td>
-                            <td className=" pl-4 w-[130px] font-extrabold text-slate-400 text-right pr-3">
+                            <td className=" pl-4 w-[130px] font-semibold text-slate-400 text-right pr-3">
                               VALOR ANUAL:
                             </td>
                             <td className="w-20">
                               {priceFormatter.format(cd.annualValue)}
                             </td>
-                            <td className=" pl-4 w-[140px] font-extrabold text-slate-400 text-right pr-3">
+                            <td className=" pl-4 w-[140px] font-semibold text-slate-400 text-right pr-3">
                               VALOR MENSAL:
                             </td>
                             <td className="w-20">
@@ -216,10 +272,10 @@ export function ClientContracts() {
                               <TbListDetails size={16} />
                             </td>
                           </tr>
-                          <tr className="bg-[#273446] text-xs font-bold">
+                          <tr className="bg-[#273446] text-xs">
                             <td
                               colSpan={3}
-                              className="py-2 pl-4 w-[90px] font-extrabold text-slate-400 text-right pr-3"
+                              className="py-2 pl-4 w-[90px] font-semibold text-slate-400 text-right pr-3"
                             >
                               SOLICITAÇÃO DE CAPACIDADE TÉCNICA:
                             </td>

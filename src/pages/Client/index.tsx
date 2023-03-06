@@ -47,7 +47,7 @@ export function Client() {
         <div className="flex items-center gap-3">
           <label
             htmlFor="filtro"
-            className="font-semibold leading-tight text-slate-100 flex items-center gap-2"
+            className="font-semibold leading-tight text-white flex items-center gap-2"
           >
             <FaSearch size={16} />
             Cliente:
@@ -57,7 +57,7 @@ export function Client() {
             id="filtro"
             placeholder="Pesquisar cliente"
             onChange={handleChangeFilterName}
-            className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 placeholder:text-slate-400 uppercase flex-1"
+            className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white placeholder:text-slate-400 uppercase flex-1"
           />
         </div>
         <Dialog.Root>
@@ -74,7 +74,8 @@ export function Client() {
               <Dialog.Close className="absolute right-6 top-6 text-slate-400 hover:text-slate-200">
                 <FiX size={24} aria-label="Fechar" />
               </Dialog.Close>
-              <Dialog.Title className="text-3xl leading-tight font-extrabold text-slate-100">
+              <Dialog.Title className="text-3xl leading-tight font-extrabold text-white flex items-center gap-3">
+                <FaPlusCircle />
                 Criar Novo Cliente
               </Dialog.Title>
               <NewClientForm />
@@ -86,20 +87,20 @@ export function Client() {
         <table className="w-full border-collapse min-w-[600px]">
           <thead>
             <tr>
-              <th className="sticky top-0 bg-slate-500 p-2 text-left text-slate-100 text-sm rounded-tl-[8px] pl-4 last:rounded-tr-[8px]">
+              <th className="sticky top-0 bg-slate-500 p-2 text-left text-white text-sm rounded-tl-[8px] pl-4 last:rounded-tr-[8px]">
                 NOME
               </th>
-              <th className="sticky top-0 bg-slate-500 p-2 text-left text-slate-100 text-sm">
+              <th className="sticky top-0 bg-slate-500 p-2 text-left text-white text-sm">
                 CNPJ
               </th>
-              <th className="sticky top-0 bg-slate-500 p-2 text-left text-slate-100 text-sm">
+              <th className="sticky top-0 bg-slate-500 p-2 text-left text-white text-sm">
                 RESPONSÁVEL
               </th>
-              <th className="sticky top-0 bg-slate-500 p-2 text-left text-slate-100 text-sm">
+              <th className="sticky top-0 bg-slate-500 p-2 text-left text-white text-sm">
                 STATUS
               </th>
-              <th className="sticky top-0 bg-slate-500 p-2 text-center text-slate-100 text-sm rounded-tr-[8px] pr-4">
-                EDIÇÃO
+              <th className="sticky top-0 bg-slate-500 p-2 text-center text-white text-sm rounded-tr-[8px] pr-4">
+                AÇÕES
               </th>
             </tr>
           </thead>
@@ -122,7 +123,6 @@ export function Client() {
                     onClick={() => handleChangeStatus(filteredD.id)}
                   >
                     <Switchs status={!!filteredD.status} key={filteredD.id} />
-                    {/* {filteredD.status ? 'Ativo' : 'Inativo'} */}
                   </td>
                   <td className=" border-t-4 border-solid border-slate-800 p-2 text-sm pr-6">
                     <div className="flex items-center justify-around">
@@ -139,7 +139,8 @@ export function Client() {
                             <Dialog.Close className="absolute right-6 top-6 text-slate-400 hover:text-slate-200">
                               <FiX size={24} aria-label="Fechar" />
                             </Dialog.Close>
-                            <Dialog.Title className="text-3xl leading-tight font-extrabold text-slate-100">
+                            <Dialog.Title className="text-3xl leading-tight font-extrabold text-white flex items-center gap-3">
+                              <FiEdit />
                               Editar Cliente
                             </Dialog.Title>
                             <UpdateClientForm
@@ -167,7 +168,7 @@ export function Client() {
                             <Dialog.Close className="absolute right-6 top-6 text-slate-400 hover:text-slate-200">
                               <FiX size={24} aria-label="Fechar" />
                             </Dialog.Close>
-                            <Dialog.Title className="text-3xl leading-tight font-extrabold text-slate-100 flex items-center gap-3">
+                            <Dialog.Title className="text-3xl leading-tight font-extrabold text-white flex items-center gap-3">
                               <FaPlusCircle />
                               Criar Novo Contrato
                             </Dialog.Title>

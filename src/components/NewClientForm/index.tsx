@@ -51,56 +51,33 @@ export function NewClientForm() {
       className="w-full flex flex-col mt-6"
     >
       <div className="flex gap-3 items-center mt-3">
-        <label
-          htmlFor="name"
-          className="font-semibold leading-tight text-slate-100"
-        >
-          Nome do Cliente:
-        </label>
         <input
           type="text"
           id="name"
           placeholder="Nome do Cliente"
           autoFocus
-          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 placeholder:text-slate-400 uppercase flex-1"
+          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight border border-solid border-cyan-600 text-slate-100 placeholder:text-slate-400 uppercase flex-1"
           {...register('name')}
         />
       </div>
       <div className="flex gap-3 items-center mt-3">
-        <label
-          htmlFor="shortName"
-          className="font-semibold leading-tight text-slate-100"
-        >
-          Nome Curto:
-        </label>
         <input
           type="text"
           id="shortName"
           placeholder="Nome do Cliente abreviado"
-          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 placeholder:text-slate-400 uppercase flex-1"
+          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight border border-solid border-cyan-600 text-slate-100 placeholder:text-slate-400 uppercase flex-1"
           {...register('shortName')}
         />
-        <label
-          htmlFor="cnpj"
-          className="font-semibold leading-tight text-slate-100"
-        >
-          CNPJ:
-        </label>
+
         <input
           type="text"
           id="cnpj"
           placeholder="CNPJ - somente numeros"
-          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 placeholder:text-slate-400 uppercase flex-1"
+          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight border border-solid border-cyan-600 text-slate-100 placeholder:text-slate-400 uppercase flex-1"
           {...register('cnpj')}
         />
       </div>
-      <div className="flex gap-3 items-center mt-3">
-        <label
-          htmlFor="treatment"
-          className="font-semibold leading-tight text-slate-100"
-        >
-          Tratamento:
-        </label>
+      <div className="flex gap-3 items-center mt-3 ">
         <Controller
           control={control}
           name="treatment"
@@ -110,7 +87,7 @@ export function NewClientForm() {
                 id="treatment"
                 defaultValue="SR"
                 value={field.value}
-                className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 uppercase w-20"
+                className="px-2 py-3 rounded-lg bg-slate-800 leading-tight border border-solid border-cyan-600 text-slate-100 uppercase w-20"
                 {...register('treatment')}
               >
                 <option value="SR">SR.</option>
@@ -122,33 +99,20 @@ export function NewClientForm() {
           }}
         />
 
-        <label
-          htmlFor="resp"
-          className="font-semibold leading-tight text-slate-100"
-        >
-          Responsável:
-        </label>
         <input
           type="text"
           id="resp"
           placeholder="Nome do Responsável"
-          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 placeholder:text-slate-400 uppercase flex-1"
+          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight border border-solid border-cyan-600 text-slate-100 placeholder:text-slate-400 uppercase flex-1"
           {...register('resp')}
         />
       </div>
       <div className="flex gap-3 items-center mt-3">
-        <label
-          htmlFor="prefixo"
-          className="font-semibold leading-tight text-slate-100"
-        >
-          Prefixo:
-        </label>
-
         <input
           type="text"
           id="prefixo"
           placeholder="Prefixo - identificador de banco de dados Ex.: PMMAP"
-          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 placeholder:text-slate-400 uppercase flex-1"
+          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight border border-solid border-cyan-600 text-slate-100 placeholder:text-slate-400 uppercase flex-1"
           {...register('prefix')}
         />
       </div>

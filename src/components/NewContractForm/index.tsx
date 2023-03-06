@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 
@@ -11,6 +11,7 @@ const newContractFormSchema = z.object({
   clientId: z.string(),
   modality: z.string(),
   nModality: z.string(),
+  bidding: z.string(),
   process: z.string(),
   contract: z.string(),
   index: z.string(),
@@ -29,6 +30,7 @@ type NewContractFormInputs = z.infer<typeof newContractFormSchema>
 export function NewContractForm({ clientId }: INewContractForm) {
   const { createContracts } = useContext(ContractContext)
   const {
+    control,
     register,
     handleSubmit,
     reset,
@@ -43,6 +45,7 @@ export function NewContractForm({ clientId }: INewContractForm) {
       clientId,
       modality,
       nModality,
+      bidding,
       process,
       contract,
       index,
@@ -54,6 +57,7 @@ export function NewContractForm({ clientId }: INewContractForm) {
       clientId,
       modality: modality.toUpperCase(),
       nModality,
+      bidding,
       process,
       contract,
       index: index.toUpperCase(),
@@ -75,19 +79,39 @@ export function NewContractForm({ clientId }: INewContractForm) {
           type="text"
           placeholder="Modalidade"
           autoFocus
-          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
+          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
           {...register('modality')}
         />
         <input
           type="text"
           placeholder="Dados da Modalidade"
-          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 border border-solid border-cyan-600 placeholder:text-slate-300 uppercase"
+          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase"
           {...register('nModality')}
+        />
+      </div>
+      <div className="flex gap-10 items-center mt-3">
+        <Controller
+          control={control}
+          name="bidding"
+          render={({ field }) => {
+            return (
+              <select
+                id="bidding"
+                defaultValue="8666/93"
+                value={field.value}
+                className="px-2 py-3 rounded-lg bg-slate-800 leading-tight border border-solid border-cyan-600 text-slate-100 uppercase w-20"
+                {...register('bidding')}
+              >
+                <option value="8.666/93">8.666/93</option>
+                <option value="14.133/2021">14.133/2021</option>
+              </select>
+            )
+          }}
         />
         <input
           type="text"
           placeholder="Nº do Processo"
-          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 border border-solid border-cyan-600 placeholder:text-slate-300 uppercase"
+          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase"
           {...register('process')}
         />
       </div>
@@ -95,13 +119,13 @@ export function NewContractForm({ clientId }: INewContractForm) {
         <input
           type="text"
           placeholder="Nº do Contrato"
-          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
+          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
           {...register('contract')}
         />
         <input
           type="text"
           placeholder="Índice de Reajuste"
-          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
+          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
           {...register('index')}
         />
       </div>
@@ -109,14 +133,14 @@ export function NewContractForm({ clientId }: INewContractForm) {
         <input
           type="text"
           placeholder="E-mails"
-          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-slate-100 border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
+          className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
           {...register('emails')}
         />
       </div>
       <div className="flex gap-3 items-center mt-3">
         <textarea
           placeholder="Objeto"
-          className="px-2 py-3 h-20 rounded-lg bg-slate-800 leading-tight text-slate-100 border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
+          className="px-2 py-3 h-20 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
           {...register('object')}
         />
       </div>
@@ -126,14 +150,14 @@ export function NewContractForm({ clientId }: INewContractForm) {
           // type="text"
 
           placeholder="Descrição Para colocar na NF"
-          className="px-2 py-3 h-20 rounded-lg bg-slate-800 leading-tight text-slate-100 border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
+          className="px-2 py-3 h-20 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
           {...register('description')}
         />
       </div>
 
       <button
         type="submit"
-        className="mt-6 rounded-lg p-4 flex items-center justify-center gap-3 font-semibold text-slate-100 bg-emerald-600 
+        className="mt-6 rounded-lg p-4 flex items-center justify-center gap-3 font-semibold text-white bg-emerald-600 
             hover:bg-emerald-700 hover:text-slate-300 transition-colors duration-300"
         disabled={isSubmitting}
       >

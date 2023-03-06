@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   ReactNode,
   useCallback,
@@ -11,6 +11,7 @@ interface IContractInput {
   clientId: string
   modality: string
   nModality: string
+  bidding: string
   process: string
   contract: string
   index: string
@@ -24,13 +25,14 @@ interface IContract {
   clientId: string
   modality: string
   nModality: string
+  bidding: string
   process: string
   contract: string
   index: string
   object: string
   description: string
   emails: string
-  status: boolean
+  // status?: boolean
 }
 
 interface IContractContext {
@@ -38,6 +40,7 @@ interface IContractContext {
   readContracts: () => Promise<void>
   readClientContracts: (clientId: string) => Promise<void>
   createContracts: (data: IContractInput) => Promise<void>
+  updateContract: (data: IContract) => Promise<void>
 }
 
 export const ContractContext = createContext({} as IContractContext)
@@ -59,6 +62,7 @@ export function ConctractProvider({ children }: IContractProvider) {
       clientId,
       modality,
       nModality,
+      bidding,
       process,
       contract,
       index,
@@ -70,6 +74,7 @@ export function ConctractProvider({ children }: IContractProvider) {
     const response = await api.post(`/contracts/${clientId}`, {
       modality,
       nModality,
+      bidding,
       process,
       contract,
       index,
@@ -87,13 +92,70 @@ export function ConctractProvider({ children }: IContractProvider) {
     setContracts(response.data)
   }, [])
 
+  const updateContract = useCallback(
+    async (data: IContract) => {
+      const {
+        id,
+        clientId,
+        contract,
+        description,
+        emails,
+        index,
+        modality,
+        nModality,
+        object,
+        process,
+        bidding,
+      } = data
+      await api.put(`/contracts/${id}`, {
+        clientId,
+        contract,
+        description,
+        emails,
+        index,
+        modality,
+        nModality,
+        object,
+        process,
+        bidding,
+      })
+      const nextContracts = contracts.map((cont) => {
+        if (cont.id === id) {
+          return {
+            ...cont,
+            clientId,
+            contract,
+            description,
+            emails,
+            index,
+            modality,
+            nModality,
+            object,
+            process,
+            bidding,
+          }
+        } else {
+          return cont
+        }
+      })
+      setContracts(nextContracts)
+    },
+    [contracts],
+  )
+
   useEffect(() => {
     readContracts()
   }, [readContracts])
 
   return (
     <ContractContext.Provider
-      value={{ contracts, readContracts, createContracts, readClientContracts }}
+      value={{
+        contracts,
+        readContracts,
+        createContracts,
+        readClientContracts,
+        updateContract,
+      }}
     >
       {children}
     </ContractContext.Provider>

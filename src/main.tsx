@@ -14,5 +14,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         </ConctractProvider>
       </ClientsProvider>
     </BrowserRouter>
+    ,
   </React.StrictMode>,
 )
