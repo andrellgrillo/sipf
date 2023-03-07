@@ -1,18 +1,17 @@
 import { useContext } from 'react'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 
-import { api } from '../../lib/axios'
-
 import { FaCheck } from 'react-icons/fa'
+import { CDetailContext } from '../../context/CDetailContext'
 
 const newCDetailFormSchema = z.object({
   contractId: z.string(),
   type: z.string(),
-  dateIn: z.string(),
-  dateOut: z.string(),
-  documentDate: z.string(),
+  dateIn: z.date({ invalid_type_error: "That's not a date!" }),
+  dateOut: z.date({ invalid_type_error: "That's not a date!" }),
+  documentDate: z.date({ invalid_type_error: "That's not a date!" }),
   annualValue: z.number(),
   monthlyValue: z.number(),
   act: z.string(),
@@ -26,6 +25,7 @@ interface INewCDetailForm {
 type NewCDetailFormInputs = z.infer<typeof newCDetailFormSchema>
 
 export function NewCDetailForm({ contractId }: INewCDetailForm) {
+  const { createCDetails } = useContext(CDetailContext)
   const {
     register,
     handleSubmit,
@@ -39,6 +39,7 @@ export function NewCDetailForm({ contractId }: INewCDetailForm) {
     console.warn('oi')
     console.log(data)
     const {
+      contractId,
       type,
       dateIn,
       dateOut,
@@ -47,7 +48,8 @@ export function NewCDetailForm({ contractId }: INewCDetailForm) {
       monthlyValue,
       act,
     } = data
-    await api.post(`/details/contract/${contractId}`, {
+    const rest = await createCDetails({
+      contractId,
       type: type.toUpperCase(),
       dateIn,
       dateOut,
@@ -56,7 +58,6 @@ export function NewCDetailForm({ contractId }: INewCDetailForm) {
       monthlyValue,
       act: act.toUpperCase(),
     })
-
     reset()
   }
 
@@ -66,6 +67,7 @@ export function NewCDetailForm({ contractId }: INewCDetailForm) {
       className="w-full flex flex-col mt-6"
     >
       <div className="flex gap-10 items-center mt-3">
+        <input type="hidden" value={contractId} {...register('contractId')} />
         <input
           type="text"
           placeholder="Contrato ou Aditamento"
@@ -74,38 +76,43 @@ export function NewCDetailForm({ contractId }: INewCDetailForm) {
           {...register('type')}
         />
         <input
-          type="text"
+          type="date"
           placeholder="Data do Documento"
           className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
-          {...register('documentDate')}
+          {...register('documentDate', { valueAsDate: true })}
         />
       </div>
       <div className="flex gap-10 items-center mt-3">
         <input
-          type="text"
+          type="date"
           placeholder="Ínicio da Vigência"
           className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
-          {...register('dateIn')}
+          {...register('dateIn', { valueAsDate: true })}
         />
+
         <input
-          type="text"
+          type="date"
           placeholder="Término da Vigência"
           className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
-          {...register('dateOut')}
+          {...register('dateOut', { valueAsDate: true })}
         />
       </div>
       <div className="flex gap-10 items-center mt-3">
         <input
-          type="text"
+          type="number"
           placeholder="Valor Anual"
           className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
-          {...register('annualValue')}
+          {...register('annualValue', {
+            valueAsNumber: true,
+          })}
         />
         <input
-          type="text"
+          type="number"
           placeholder="Valor Mensal"
           className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
-          {...register('monthlyValue')}
+          {...register('monthlyValue', {
+            valueAsNumber: true,
+          })}
         />
       </div>
       <div className="flex gap-3 items-center mt-3">
@@ -120,7 +127,7 @@ export function NewCDetailForm({ contractId }: INewCDetailForm) {
       <button
         type="submit"
         className="mt-6 rounded-lg p-4 flex items-center justify-center gap-3 font-semibold text-white bg-emerald-600 
-            hover:bg-emerald-700 hover:text-slate-300 transition-colors duration-300"
+            hover:bg-emerald-700 hover:text-slate-300 transition-colors duration-300 disabled:bg-red-500"
         disabled={isSubmitting}
       >
         <FaCheck size={20} fontWeight="bold" />

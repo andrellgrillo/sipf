@@ -34,7 +34,8 @@ interface ICDetailInput {
 
 interface ICDetailContext {
   cDetails: ICDetail[]
-  readCDetails: (contractId: string) => Promise<void>
+  readCDetails: () => Promise<void>
+  getCDetails: (contractId: string) => Promise<void>
   createCDetails: (data: ICDetailInput) => Promise<void>
 }
 
@@ -63,8 +64,8 @@ export function CDetailProvider({ children }: ICDetailProvider) {
       monthlyValue,
       act,
     } = data
-
-    const response = await api.post(`/details/${contractId}`, {
+    console.log(data)
+    const response = await api.post(`/details/contract/${contractId}`, {
       type,
       dateIn,
       dateOut,
@@ -76,12 +77,19 @@ export function CDetailProvider({ children }: ICDetailProvider) {
     setCDetails((state) => [...state, response.data])
   }, [])
 
+  const getCDetails = useCallback(async (contractId: string) => {
+    const response = await api.get(`/details/contract/${contractId}`)
+    setCDetails(response.data)
+  }, [])
+
   useEffect(() => {
     readCDetails()
   }, [readCDetails])
 
   return (
-    <CDetailContext.Provider value={{ cDetails, readCDetails, createCDetails }}>
+    <CDetailContext.Provider
+      value={{ cDetails, readCDetails, createCDetails, getCDetails }}
+    >
       {children}
     </CDetailContext.Provider>
   )

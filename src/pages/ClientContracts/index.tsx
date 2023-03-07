@@ -69,8 +69,7 @@ export function ClientContracts() {
 
       <div
         id="accordionFlushExample"
-        className="flex overflow-auto mt-8 w-screen"
-        // key={clientContracts.id}
+        className="flex overflow-auto mt-8 w-screen px-5"
       >
         <div className="w-full border-collapse min-w-[600px]">
           <div className="sticky top-0 bg-slate-500 p-2 text-left text-white test-sm rounded-tl-[8px] pl-4 last:rounded-tr-[8px]">

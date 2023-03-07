@@ -7,7 +7,7 @@ interface IHeader {
 
 export function Header({ setIsOpen, title }: IHeader) {
   return (
-    <div className="p-4 flex justify-start items-center text-white bg-slate-800">
+    <div className="p-4 flex justify-start items-center text-white bg-slate-800 scroobar-hide">
       <button
         className="flex items-center gap-2"
         onClick={() => setIsOpen(true)}

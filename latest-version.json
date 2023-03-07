@@ -1,11 +1,11 @@
 {
-  "version": "0.2.1",
-  "notes": "Adicionando o autoUpdater",
+  "version": "0.2.2",
+  "notes": "Rota de Contratos 100% \nRota de Detahles do Contrato 75%",
   "pub_date": "2023-03-03T05:35:57Z",
   "platforms": {
     "windows-x86_64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTbjVYcG55UnhpTzJFMWhmMG1PSnV2K05wbGhOY2swWjhudzJSenM4RUdHRFQ3Yk1WWEsweVRWanM3dUNFeXk5VWM4dVhkVkZSd3d1Ly92K05selQ2WU1GYlI1MVhZSndBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNjc3ODUwNTcxCWZpbGU6c2lwZl8wLjIuMV94NjRfZW4tVVMubXNpLnppcApoTWZhdFJtRzBBTmw5ZVFQOEEvc2x0UUs1QnpNRTRIakI3SmttbGVDWEtHRDJDWm5GNU9lT2JyS0Z0dWEzWFV4NE5SSUhVQm4vdGI3a0tpa2xMOE1DUT09Cg==",
-      "url": "https://github.com/andrellgrillo/sipf/releases/download/v0.2.1/sipf_0.2.1_x64_en-US.msi.zip"
+      "url": "https://github.com/andrellgrillo/sipf/releases/download/v0.2.2/sipf_0.2.2_x64_en-US.msi.zip"
     }
   }
 }

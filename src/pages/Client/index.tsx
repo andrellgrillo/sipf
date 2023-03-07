@@ -35,15 +35,9 @@ export function Client() {
     setFilterName('')
   }, [setFilterName])
 
-  // console.log(clients)
-
-  // clients.map((c) => {
-  //   return c.id
-  // })
-
   return (
     <>
-      <div className="w-screen px-4 flex justify-end gap-4">
+      <div className="w-screen px-5 flex justify-end gap-4 scrollbar-hide">
         <div className="flex items-center gap-3">
           <label
             htmlFor="filtro"
@@ -83,8 +77,8 @@ export function Client() {
           </Dialog.Portal>
         </Dialog.Root>
       </div>
-      <div className="flex overflow-auto mt-8 w-screen">
-        <table className="w-full border-collapse min-w-[600px]">
+      <div className="flex mt-8 w-screen overflow-y-auto scrollbar-hide px-5">
+        <table className="w-full min-w-[600px] h-[400px]">
           <thead>
             <tr>
               <th className="sticky top-0 bg-slate-500 p-2 text-left text-white text-sm rounded-tl-[8px] pl-4 last:rounded-tr-[8px]">
@@ -96,7 +90,7 @@ export function Client() {
               <th className="sticky top-0 bg-slate-500 p-2 text-left text-white text-sm">
                 RESPONSÁVEL
               </th>
-              <th className="sticky top-0 bg-slate-500 p-2 text-left text-white text-sm">
+              <th className="sticky top-0 bg-slate-500 p-2 text-left text-white text-sm z-10">
                 STATUS
               </th>
               <th className="sticky top-0 bg-slate-500 p-2 text-center text-white text-sm rounded-tr-[8px] pr-4">
