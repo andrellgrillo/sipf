@@ -70,7 +70,7 @@ export function ConctractProvider({ children }: IContractProvider) {
       description,
       emails,
     } = data
-    console.log(data)
+    // console.log(data)
     const response = await api.post(`/contracts/${clientId}`, {
       modality,
       nModality,

@@ -2,17 +2,22 @@ import { useContext, useEffect, useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { useParams } from 'react-router-dom'
 import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 
-import { TbListDetails } from 'react-icons/tb'
+import { TbListDetails, TbPlaylistAdd } from 'react-icons/tb'
 import { FiEdit, FiX } from 'react-icons/fi'
 import { MdPlaylistAdd } from 'react-icons/md'
 
 import { ContractContext } from '../../context/ContractContext'
-import { api } from '../../lib/axios'
 import { priceFormatter } from '../../utils/format'
 import { UpdateContractForm } from '../../components/UpdateContractForm'
 import { FaPlusCircle } from 'react-icons/fa'
 import { NewCDetailForm } from '../../components/NewCDetailForm'
+import { UpdateCDetailsForm } from '../../components/UpdateCDetailsForm'
+import { CDetailContext } from '../../context/CDetailContext'
+
+dayjs.extend(utc)
+dayjs().utcOffset(0)
 
 type IUseParams = {
   nome: string
@@ -23,9 +28,9 @@ interface IContractDetails {
   id: string
   contractId: string
   type: string
-  dateIn: string
-  dateOut: string
-  documentDate: string
+  dateIn: Date
+  dateOut: Date
+  documentDate: Date
   annualValue: number
   monthlyValue: number
   act: string
@@ -35,16 +40,19 @@ interface IContractDetails {
 export function ClientContracts() {
   const { nome, clientId } = useParams<keyof IUseParams>() as IUseParams
   const { contracts, readClientContracts } = useContext(ContractContext)
-  const [contractDetails, setContractDetails] = useState<IContractDetails[]>([])
+  const { cDetails, getCDetails } = useContext(CDetailContext)
+  // const [contractDetails, setContractDetails] = useState<IContractDetails[]>([])
+  const [open, setOpen] = useState<boolean>(false)
 
   useEffect(() => {
     readClientContracts(clientId)
   }, [clientId, readClientContracts])
 
-  async function handleGetDetails(contractId: string) {
-    const response = await api.get(`/details/contract/${contractId}`)
-    setContractDetails(response.data)
+  function handleGetDetails(contractId: string) {
+    getCDetails(contractId)
   }
+
+  useEffect(() => {}, [cDetails])
 
   return (
     <>
@@ -72,7 +80,7 @@ export function ClientContracts() {
         className="flex overflow-auto mt-8 w-screen px-5"
       >
         <div className="w-full border-collapse min-w-[600px]">
-          <div className="sticky top-0 bg-slate-500 p-2 text-left text-white test-sm rounded-tl-[8px] pl-4 last:rounded-tr-[8px]">
+          <div className="sticky top-0 bg-slate-500 p-2 text-left text-white test-sm rounded-tl-[8px] pl-4 rounded-tr-[8px]">
             {nome}
           </div>
           {contracts.map((contract, i) => {
@@ -231,7 +239,7 @@ export function ClientContracts() {
                   data-te-parent="#accordionFlushExample"
                 >
                   <div className="py-4 px-5 bg-[#273446] text-white text-sm">
-                    {contractDetails.map((cd) => (
+                    {cDetails.map((cd) => (
                       <table
                         key={cd.id}
                         className="w-full border-collapse min-w-[600px] border-b-[1px] border-solid border-slate-600"
@@ -242,19 +250,21 @@ export function ClientContracts() {
                               TIPO:
                             </td>
                             <td className="w-32">{cd.type}</td>
-                            <td className=" pl-4 w-[90px] font-semibold text-slate-400 text-right pr-3">
-                              VALIDADE:
-                            </td>
-                            <td className="w-40">
-                              {dayjs(cd.dateIn).format('DD/MM/YYYY')} -{' '}
-                              {dayjs(cd.dateOut).format('DD/MM/YYYY')}
-                            </td>
-                            <td className="pl-4 w-[190px] font-semibold text-slate-400 text-right pr-3">
+                            <td className="pl-4 w-[140px] font-semibold text-slate-400 text-right pr-3">
                               DATA DO DOCUMENTO:
                             </td>
                             <td className="w-20">
-                              {dayjs(cd.documentDate).format('DD/MM/YYYY')}
+                              {dayjs.utc(cd.documentDate).format('DD/MM/YYYY')}
                             </td>
+                            <td className=" pl-4 w-[90px] font-semibold text-slate-400 text-right pr-3">
+                              VALIDADE:
+                            </td>
+
+                            <td className="w-40">
+                              {dayjs.utc(cd.dateIn).format('DD/MM/YYYY')} -{' '}
+                              {dayjs.utc(cd.dateOut).format('DD/MM/YYYY')}
+                            </td>
+
                             <td className=" pl-4 w-[130px] font-semibold text-slate-400 text-right pr-3">
                               VALOR ANUAL:
                             </td>
@@ -268,15 +278,63 @@ export function ClientContracts() {
                               {priceFormatter.format(cd.monthlyValue)}
                             </td>
                             <td rowSpan={2} className="w-10 pl-5">
-                              <TbListDetails size={16} />
+                              <div className="flex justify-center items-center flex-col px-4 gap-2">
+                                <Dialog.Root
+                                // key={cd.id}
+                                // open={open}
+                                // onOpenChange={setOpen}
+                                >
+                                  <Dialog.Trigger
+                                    type="button"
+                                    className="text-sm font-extrabold rounded flex justify-center items-center gap-2 hover:text-cyan-500"
+                                  >
+                                    <FiEdit size={16} />
+                                  </Dialog.Trigger>
+                                  <Dialog.Portal>
+                                    <Dialog.Overlay className="w-screen bg-slate-900/80 fixed inset-0" />
+                                    <Dialog.Content className="absolute p-10 bg-slate-800 rounded-2xl w-full max-w-4xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                                      <Dialog.Close className="absolute right-6 top-6 text-slate-400 hover:text-slate-200">
+                                        <FiX size={24} aria-label="Fechar" />
+                                      </Dialog.Close>
+                                      <Dialog.Title className="text-3xl leading-tight font-extrabold text-white flex items-center gap-3">
+                                        <FiEdit />
+                                        Editar Detalhes do Contrato
+                                      </Dialog.Title>
+                                      <UpdateCDetailsForm
+                                        id={cd.id}
+                                        contractId={cd.contractId}
+                                        type={cd.type}
+                                        documentDate={cd.documentDate}
+                                        dateIn={cd.dateIn}
+                                        dateOut={cd.dateOut}
+                                        din={dayjs
+                                          .utc(cd.dateIn)
+                                          .format('YYYY-MM-DD')}
+                                        dou={dayjs
+                                          .utc(cd.dateOut)
+                                          .format('YYYY-MM-DD')}
+                                        doc={dayjs
+                                          .utc(cd.documentDate)
+                                          .format('YYYY-MM-DD')}
+                                        annualValue={cd.annualValue}
+                                        monthlyValue={cd.monthlyValue}
+                                        act={cd.act}
+                                        // setOpen={setOpen}
+                                      />
+                                    </Dialog.Content>
+                                  </Dialog.Portal>
+                                </Dialog.Root>
+                                <TbPlaylistAdd size={16} />
+                                <TbListDetails size={16} />
+                              </div>
                             </td>
                           </tr>
                           <tr className="bg-[#273446] text-xs">
                             <td
-                              colSpan={3}
+                              // colSpan={2}
                               className="py-2 pl-4 w-[90px] font-semibold text-slate-400 text-right pr-3"
                             >
-                              SOLICITAÇÃO DE CAPACIDADE TÉCNICA:
+                              ATESTADO DE CAP. TÉC.:
                             </td>
                             <td colSpan={7}>{cd.act}</td>
                           </tr>

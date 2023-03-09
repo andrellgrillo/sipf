@@ -6,7 +6,6 @@ import {
   useState,
 } from 'react'
 import { api } from '../lib/axios'
-import { ContractContext } from './ContractContext'
 
 interface ICDetail {
   id: string
@@ -34,9 +33,10 @@ interface ICDetailInput {
 
 interface ICDetailContext {
   cDetails: ICDetail[]
-  readCDetails: () => Promise<void>
+  // readCDetails: () => Promise<void>
   getCDetails: (contractId: string) => Promise<void>
   createCDetails: (data: ICDetailInput) => Promise<void>
+  updateCDetails: (data: ICDetail) => Promise<void>
 }
 
 export const CDetailContext = createContext({} as ICDetailContext)
@@ -48,10 +48,10 @@ interface ICDetailProvider {
 export function CDetailProvider({ children }: ICDetailProvider) {
   const [cDetails, setCDetails] = useState<ICDetail[]>([])
 
-  const readCDetails = useCallback(async () => {
-    const response = await api.get('/details/')
-    setCDetails(response.data)
-  }, [])
+  // const readCDetails = useCallback(async () => {
+  //   const response = await api.get('/details/')
+  //   setCDetails(response.data)
+  // }, [])
 
   const createCDetails = useCallback(async (data: ICDetailInput) => {
     const {
@@ -64,7 +64,7 @@ export function CDetailProvider({ children }: ICDetailProvider) {
       monthlyValue,
       act,
     } = data
-    console.log(data)
+    // console.log(data)
     const response = await api.post(`/details/contract/${contractId}`, {
       type,
       dateIn,
@@ -82,13 +82,64 @@ export function CDetailProvider({ children }: ICDetailProvider) {
     setCDetails(response.data)
   }, [])
 
-  useEffect(() => {
-    readCDetails()
-  }, [readCDetails])
+  const updateCDetails = useCallback(
+    async (data: ICDetail) => {
+      const {
+        id,
+        contractId,
+        type,
+        dateIn,
+        dateOut,
+        documentDate,
+        annualValue,
+        monthlyValue,
+        act,
+      } = data
+      await api.put(`/details/contract/${id}`, {
+        contractId,
+        type,
+        dateIn,
+        dateOut,
+        documentDate,
+        annualValue,
+        monthlyValue,
+        act,
+      })
+      const nextCDetails = cDetails.map((cdetail) => {
+        if (cdetail.id === id) {
+          return {
+            ...cdetail,
+            contractId,
+            type,
+            dateIn,
+            dateOut,
+            documentDate,
+            annualValue,
+            monthlyValue,
+            act,
+          }
+        } else {
+          return cdetail
+        }
+      })
+      setCDetails(nextCDetails)
+    },
+    [cDetails],
+  )
+
+  // useEffect(() => {
+  //   readCDetails()
+  // }, [readCDetails])
 
   return (
     <CDetailContext.Provider
-      value={{ cDetails, readCDetails, createCDetails, getCDetails }}
+      value={{
+        cDetails,
+        // readCDetails,
+        createCDetails,
+        getCDetails,
+        updateCDetails,
+      }}
     >
       {children}
     </CDetailContext.Provider>

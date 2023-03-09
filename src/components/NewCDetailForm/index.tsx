@@ -30,14 +30,14 @@ export function NewCDetailForm({ contractId }: INewCDetailForm) {
     register,
     handleSubmit,
     reset,
-    formState: { isSubmitting },
+    formState: { isSubmitting, isSubmitted, isSubmitSuccessful },
   } = useForm<NewCDetailFormInputs>({
     resolver: zodResolver(newCDetailFormSchema),
   })
 
   async function handleCreateNewCDetail(data: NewCDetailFormInputs) {
-    console.warn('oi')
-    console.log(data)
+    // console.warn('oi')
+    // console.log(data)
     const {
       contractId,
       type,
@@ -48,7 +48,7 @@ export function NewCDetailForm({ contractId }: INewCDetailForm) {
       monthlyValue,
       act,
     } = data
-    const rest = await createCDetails({
+    await createCDetails({
       contractId,
       type: type.toUpperCase(),
       dateIn,
@@ -58,6 +58,7 @@ export function NewCDetailForm({ contractId }: INewCDetailForm) {
       monthlyValue,
       act: act.toUpperCase(),
     })
+
     reset()
   }
 
@@ -65,6 +66,7 @@ export function NewCDetailForm({ contractId }: INewCDetailForm) {
     <form
       onSubmit={handleSubmit(handleCreateNewCDetail)}
       className="w-full flex flex-col mt-6"
+      autoComplete="off"
     >
       <div className="flex gap-10 items-center mt-3">
         <input type="hidden" value={contractId} {...register('contractId')} />
@@ -99,7 +101,7 @@ export function NewCDetailForm({ contractId }: INewCDetailForm) {
       </div>
       <div className="flex gap-10 items-center mt-3">
         <input
-          type="number"
+          type="text"
           placeholder="Valor Anual"
           className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
           {...register('annualValue', {
@@ -107,7 +109,7 @@ export function NewCDetailForm({ contractId }: INewCDetailForm) {
           })}
         />
         <input
-          type="number"
+          type="text"
           placeholder="Valor Mensal"
           className="px-2 py-3 rounded-lg bg-slate-800 leading-tight text-white border border-solid border-cyan-600 placeholder:text-slate-300 uppercase flex-1"
           {...register('monthlyValue', {
